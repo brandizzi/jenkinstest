@@ -7,7 +7,7 @@ pipeline {
                 sh '''
                     echo "Multiline shell steps works too"
                     ls -lah
-                    echo $RANDOM $((RANDOM % 10))
+                    echo $RANDOM $((RANDOM % 10)) d $(od -An -N1 -i /dev/random)
                 '''
                 retry(3) {
                   sh 'echo trying flakey... ; exit $((RANDOM % 3))'
