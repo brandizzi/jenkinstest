@@ -7,13 +7,18 @@ pipeline {
                 sh '''
                     echo "Multiline shell steps works too"
                     ls -lah
-                    echo $RANDOM $((RANDOM % 10)) d $(od -An -N1 -i /dev/random)
                 '''
                 retry(3) {
-                  sh 'echo trying flakey... ; exit $((RANDOM % 3))'
+                    sh '''
+                      R=$(od -An -N1 -i /dev/random)
+                      echo retry R=$R
+                      echo trying flakey... ; [ "$R" % 2 -eq 0 ] && exit 1
+                    '''
                 }
                 timeout(time: 5, unit: 'SECONDS') {
-                  sh 'echo trying slow... ; sleep $((RANDOM % 10 + 1))'
+                  R=$(od -An -N1 -i /dev/random)
+                  echo timeout R=$R
+                  sh 'echo trying slow... ; [ "$R" % 2 -eq 0 ] && sleep 10
                 }
             }
         }
