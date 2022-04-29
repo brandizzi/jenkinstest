@@ -16,9 +16,11 @@ pipeline {
                     '''
                 }
                 timeout(time: 5, unit: 'SECONDS') {
-                  R=$(od -An -N1 -i /dev/random)
-                  echo timeout R=$R
-                  sh 'echo trying slow... ; [ "$R" % 2 -eq 0 ] && sleep 10
+                    sh '''
+                      R=$(od -An -N1 -i /dev/random)
+                      echo timeout R=$R
+                      sh 'echo trying slow... ; [ "$R" % 2 -eq 0 ] && sleep 10
+                    '''
                 }
             }
         }
