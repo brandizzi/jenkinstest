@@ -11,7 +11,7 @@ pipeline {
                 retry(3) {
                   sh 'echo trying flakey... ; exit $((RANDOM % 3))'
                 }
-                timeout(time: 5, unity: 'SECONDS') {
+                timeout(time: 5, unit: 'SECONDS') {
                   sh 'trying slow... ; sleep $((RANDOM % 10 + 1))'
                 }
             }
