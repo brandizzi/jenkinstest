@@ -12,14 +12,14 @@ pipeline {
                     sh '''
                       R=$(od -An -N1 -i /dev/random)
                       echo retry R=$R
-                      echo trying flakey... ; [ $((R % 3)) -eq 0 ] && exit 1
+                      echo trying flakey... ; [ $((R % 3)) -eq 0 ] && exit 1 || echo 'flakey ok'
                     '''
                 }
                 timeout(time: 5, unit: 'SECONDS') {
                     sh '''
                       R=$(od -An -N1 -i /dev/random)
                       echo timeout R=$R
-                      sh 'echo trying slow... ; [ $((R % 3)) -eq 0 ] && sleep 10
+                      sh 'echo trying slow... ; [ $((R % 3)) -eq 0 ] && sleep 10 || echo 'slow ok'
                     '''
                 }
             }
