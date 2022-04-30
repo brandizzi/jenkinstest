@@ -19,7 +19,7 @@ pipeline {
                     sh '''
                       R=$(od -An -N1 -i /dev/random)
                       echo timeout R=$R
-                      echo trying slow... ; [ $((R % 3)) -eq 0 ] && sleep 10 || echo 'slow ok'
+                      echo trying slow... ; [ $((R % 3)) -eq 0 ] && sleep 10
                     '''
                 }
             }
