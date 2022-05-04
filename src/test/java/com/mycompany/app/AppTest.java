@@ -1,6 +1,7 @@
 package com.mycompany.app;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -15,6 +16,8 @@ public class AppTest
     @Test
     public void shouldAnswerWithTrue()
     {
+        if (Math.random() < 0.5)
+          fail("uh oh");
         assertTrue( true );
     }
 }
