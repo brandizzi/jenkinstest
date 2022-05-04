@@ -9,8 +9,7 @@ pipeline {
     }
     post {
         always {
-            sh 'ls target/surefire-reports'
-            junit 'target/surefire-reports'
+            junit 'target/surefire-reports/**/*.xml'
         }
     }
 }
