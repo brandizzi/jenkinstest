@@ -9,7 +9,7 @@ pipeline {
     }
     post {
         always {
-            archiveArtifacts artifacts: 'target/**/*.jar', fingerprint: true
+            archiveArtifacts artifacts: 'target/**/*.class', fingerprint: true
             junit 'target/surefire-reports/**/*.xml'
         }
     }
