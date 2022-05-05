@@ -3,23 +3,23 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh """
+                sh '''
                 R=$(od -An -N1 -i /dev/random)
                 echo $R > result
-                """
+                '''
             }
         }
 
         stage('Test') {
             steps {
-                sh """
+                sh '''
                 R=$(cat result)
                 if [ $((R < 0.5)) ]
                 then
                    echo test failed
                    exit 1
                 fi
-                """
+                '''
             }
         }
 
