@@ -1,12 +1,31 @@
 pipeline {
     agent any
     stages {
-        /* "Build" and "Test" stages omitted */
+        stage('Build') {
+            steps {
+                sh """
+                R=$(od -An -N1 -i /dev/random)
+                echo $R > result
+                """
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh """
+                R=$(cat result)
+                if [ $((R < 0.5)) ]
+                then
+                   echo test failed
+                   exit 1
+                fi
+                """
+            }
+        }
 
         stage('Deploy - Staging') {
             steps {
-                sh './deploy staging'
-                sh './run-smoke-tests'
+                echo 'Cool! all ok'
             }
         }
 
