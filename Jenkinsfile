@@ -14,8 +14,7 @@ pipeline {
             steps {
                 sh '''
                 R=$(cat result)
-                if [ $((R < 0.5)) ]
-                then
+                if [ $((R % 3)) -eq 0 ] ; then
                    echo test failed
                    exit 1
                 fi
